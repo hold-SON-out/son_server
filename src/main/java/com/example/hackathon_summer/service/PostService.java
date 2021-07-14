@@ -72,7 +72,7 @@ public class PostService {
     @Transactional(readOnly = true)
     public List<PostDto> getPostsTitle(String q) {
         try {
-            List<Post> posts = postRepository.findAllByTitleContaining(q);
+            List<Post> posts = postRepository.findAllByTitleContaining(q, Sort.by(Sort.Direction.DESC, "idx"));
             List<PostDto> postList = new ArrayList<>();
 
             for (Post post : posts) {
@@ -103,7 +103,7 @@ public class PostService {
             User user = userRepo.findUserByNameContaining(q).orElseThrow(
                     () -> new HttpClientErrorException(HttpStatus.BAD_REQUEST, "그딴거 없다")
             );
-            List<Post> posts = postRepository.findAllByUser(user);
+            List<Post> posts = postRepository.findAllByUser(user, Sort.by(Sort.Direction.DESC, "idx"));
             List<PostDto> postList = new ArrayList<>();
 
             for (Post post : posts) {
