@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.HttpClientErrorException;
 
@@ -22,7 +23,7 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping("")
-    public Response createComment(@ModelAttribute @Valid CommentCreateDto commentCreateDto,
+    public Response createComment(@RequestBody @Valid CommentCreateDto commentCreateDto,
                                   HttpServletRequest request) {
 
         User author = (User) request.getAttribute("user");

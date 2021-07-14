@@ -23,7 +23,7 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping("")
-    public Response createPost(@ModelAttribute @Valid PostCreateDto postCreateDto,
+    public Response createPost(@RequestBody @Valid PostCreateDto postCreateDto,
                                HttpServletRequest request) {
         User author = (User) request.getAttribute("user");
         if (author == null) {
